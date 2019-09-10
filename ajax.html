@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Ajax</title>
+<script language="javascript">
+var XMLHttpRequestObject=false;
+if(window.XMLHttpRequest)
+{
+XMLHttpRequestObject=new XMLHttpRequest();
+}
+elseif(window.ActiveXObject)
+{
+XMLHttpRequestObject=new ActiveXObject("Microsoft.XMLHTTP");
+}
+function getData(dattaSource,divID)
+{
+if(XMLHttpRequestObject)
+{
+var obj=document.getElementById(divID);
+XMLHttpRequestObject.open("GET",dataSource);
+XMLHttpRequestObject.onreadystatechange=function()
+{
+if(XMLHttpRequestObject.readyState==4&&
+XMLHttpRequestObject.status==200)
+{
+obj.innerHTML=XMLHttpRequestObject.responseText;
+}
+}
+XMLHttpRequestObject.send(null);
+}
+}
+</script>
+</head>
+<body>
+<h1>Fetching data with ajax</h1>
+<form>
+<input type="button" value="Display message"
+onclick="getData('a.txt','targetDiv')">
+</form>
+<div id="targetDiv">
+<p>Data from server will go here</p>
+</div>
+</body>
+</html>
